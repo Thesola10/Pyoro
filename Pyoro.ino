@@ -358,7 +358,7 @@ void gameLoop()
 void doBrandLogos()
 {
   arduboy.clear();
-  arduboy.drawBitmap(12,24,mylogo,112,19, WHITE);
+  arduboy.drawBitmap(12,24,mylogo,106,18, WHITE);
   arduboy.display();
   delay(2000);
 }

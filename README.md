@@ -1,2 +1,2 @@
 # Pyoro
-Ported for the Arduboy!
+Clone for the Arduboy!

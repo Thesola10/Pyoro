@@ -1,6 +1,7 @@
 //// DEFINITIONS
 
 #include <stdlib.h>
+#include <limits.h>
 #include <Arduboy2.h>
 #include <ArduboyTones.h>
 #include "assets.h"

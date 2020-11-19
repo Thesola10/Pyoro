@@ -1,3 +1,13 @@
+/**
+ * Pyoro clone for the Arduboy.
+ * This program is licensed under the terms of the Creative Commons Zero (CC0) license.
+ *
+ * Authors:
+ * - Karim "TheSola10" Vergnes  <thesola10@bobile.fr>       Original assets
+ *
+ * Kindly update this comment block when editing this source file, thanks!
+ */
+
 #ifndef __ASSETS_H
 #define __ASSETS_H
 
@@ -39,4 +49,4 @@ PROGMEM const unsigned char angel[] =
   0x1e, 0x18, 0x2a, 0x45, 0xea, 0x18, 0xe, 0x1c, 
 };
 
-#endif
+#endif //__ASSETS_H

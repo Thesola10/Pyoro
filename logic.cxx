@@ -3,13 +3,19 @@
  * This program is licensed under the terms of the Creative Commons Zero (CC0) license.
  *
  * Authors:
- * - Karim "TheSola10" Vergnes  <thesola10@bobile.fr>       Original code
+ * - Karim Vergnes  <me@thesola.io>             Original code
  *
  * Kindly update this comment block when editing this source file, thanks!
  */
 
-#include "logic.h"
-#include "graphics.h"
+#include "logic.hxx"
+#include "graphics.hxx"
+#include "assets.hxx"
+
+static void MainMenu::init(void)
+{
+
+}
 
 static void MainMenu::loop(void)
 {
@@ -33,6 +39,11 @@ void MainMenu::drawBackdrop(void)
     arduboy.drawBitmap(60, 36, brick,      4,  4, WHITE);
 }
 
+
+static void Game::init(void)
+{
+
+}
 
 static void Game::loop(void)
 {
@@ -67,24 +78,24 @@ void Game::flipBrick(int index, bool anim)
 void Game::updateBeans(void)
 {
     Bird::tongue_pos tpos = player->getTonguePos();
-    for (bean : this->beans) {
-        if (bean && bean->type != B_NONE)
-            bean->update(this, tpos.tipx, tpos.tipy);
+    for (int i = 0; i < 16; i++) {
+        if (beans[i] && beans[i]->type != Bean::type::B_NONE)
+            beans[i]->update(this, tpos.tipx, tpos.tipy);
     }
     beanCreator->update(this);
 }
 
 void Game::updateAngels(void)
 {
-    for (angel : this->angels) {
-        if (angel && angel->step) {
-            angel->display();
-            if (!(this->metronome % 10)
-                angel->step ++;
-            if (angel->step == 5)
-                this->setBrick(angel->replaces, true);
-            else if (angel->step == 7)
-                delete angel;
+    for (int i = 0; i < 8; i++) {
+        if (angels[i] && angels[i]->step) {
+            angels[i]->display();
+            if (!(this->metronome % 10))
+                angels[i]->step ++;
+            if (angels[i]->step == 5)
+                this->flipBrick(angels[i]->replaces, true);
+            else if (angels[i]->step == 7)
+                delete angels[i];
         }
     }
     angelCreator->update(this);

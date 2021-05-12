@@ -3,13 +3,13 @@
  * This program is licensed under the terms of the Creative Commons Zero (CC0) license.
  *
  * Authors:
- * - Karim "TheSola10" Vergnes  <thesola10@bobile.fr>       Original code
+ * - Karim Vergnes  <me@thesola.io>             Original code
  *
  * Kindly update this comment block when editing this source file, thanks!
  */
 
 #include <limits.h>
-#include "math.h"
+#include "math.hxx"
 
 void sub_bound(unsigned int *value, const unsigned int delta, const unsigned int min)
 {

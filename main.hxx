@@ -3,7 +3,7 @@
  * This program is licensed under the terms of the Creative Commons Zero (CC0) license.
  *
  * Authors:
- * - Karim "TheSola10" Vergnes  <thesola10@bobile.fr>       Original code
+ * - Karim Vergnes  <me@thesola.io>             Original code
  *
  * Kindly update this comment block when editing this source file, thanks!
  */
@@ -14,8 +14,8 @@
 #include <stdlib.h>
 #include <Arduboy2.h>
 #include <ArduboyTones.h>
-#include "game.h"
-#include "logic.h"
+#include "game.hxx"
+#include "logic.hxx"
 
 Arduboy2 arduboy;
 ArduboyTones sound(arduboy.audio.enabled);

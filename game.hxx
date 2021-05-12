@@ -3,7 +3,7 @@
  * This program is licensed under the terms of the Creative Commons Zero (CC0) license.
  *
  * Authors:
- * - Karim "TheSola10" Vergnes  <thesola10@bobile.fr>       Original code
+ * - Karim Vergnes  <me@thesola.io>             Original code
  *
  * Kindly update this comment block when editing this source file, thanks!
  */
@@ -58,14 +58,13 @@ public:
         Bean create(bool allowsuper);
     };
 
-    void display(void);
-    void update(Game *game, int tongueTipX, int tongueTipY);
-
-private:
     unsigned int speed;     // In 0.01 pixel units per frame, vertical speed
     unsigned char x;        // In pixels, X position, does not change on instance
     unsigned int y;         // In 0.01 pixel units, Y position updated with speed
     Bean::type type;        // Current type of the bean
+
+    void display(void);
+    void update(Game *game, int tongueTipX, int tongueTipY);
 };
 
 class Angel
@@ -86,8 +85,6 @@ public:
         Angel create(char replaces);
     };
 
-    void display(void);
-private:
     char replaces;  // Index of the brick being replaced
     char step = 1;  /* Animation step for Pyoro angel, as specified above
                      *
@@ -95,7 +92,8 @@ private:
                      * At Step 5, the brick is no longer held, and restored in the mask
                      * At Step 7, the angel is unloaded
                      */
-};
 
+    void display(void);
+};
 
 #endif //__GAME_H

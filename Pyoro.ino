@@ -3,13 +3,13 @@
  * This program is licensed under the terms of the Creative Commons Zero (CC0) license.
  *
  * Authors:
- * - Karim "TheSola10" Vergnes  <thesola10@bobile.fr>       Original code
+ * - Karim Vergnes  <me@thesola.io>             Original code
  *
  * Kindly update this comment block when editing this source file, thanks!
  */
 
-#include "main.h"
-#include "assets.h"
+#include "main.hxx"
+#include "assets.hxx"
 
 void setup() 
 {
@@ -28,7 +28,7 @@ void setup()
   } else 
   {
     hiscore = EEPROM.get(ROM_HISCORE, hiscore);
-    showMenu();
+    MainMenu::init();
   }
 }
 

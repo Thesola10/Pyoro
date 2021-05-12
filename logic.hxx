@@ -3,19 +3,20 @@
  * This program is licensed under the terms of the Creative Commons Zero (CC0) license.
  *
  * Authors:
- * - Karim "TheSola10" Vergnes  <thesola10@bobile.fr>       Original code
+ * - Karim Vergnes  <me@thesola.io>             Original code
  *
  * Kindly update this comment block when editing this source file, thanks!
  */
 
 #ifndef __LOGIC_H
 #define __LOGIC_H
-#include "game.h"
+#include "game.hxx"
 
 class MainMenu
 {
 public:
     static void loop(void);
+    static void init(void);
 private:
     void drawBackdrop(void);
 };
@@ -36,11 +37,6 @@ public:
 
     Score score;
 
-    static void loop(void);
-    void gameOver(void);
-    void flipBrick(int index, bool anim);
-    char checkBrick(int index);
-private:
     Bird *player;
     Bean::Creator   *beanCreator;
     Angel::Creator  *angelCreator;
@@ -57,6 +53,11 @@ private:
     void updateBeans(void);
     void updateAngels(void);
 
+    static void init(void);
+    static void loop(void);
+    void gameOver(void);
+    void flipBrick(int index, bool anim);
+    char checkBrick(int index);
 };
 
 #endif //__LOGIC_H

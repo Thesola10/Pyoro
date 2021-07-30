@@ -1,4 +1,4 @@
-/**
+/*
  * Pyoro clone for the Arduboy.
  * This program is licensed under the terms of the Creative Commons Zero (CC0) license.
  *
@@ -17,6 +17,7 @@ void setup()
   arduboy.blank();         
   arduboy.flashlight();    // magic key protection
   arduboy.systemButtons(); // mute toggle
+                           //TODO: Drop once settings menu is complete
   arduboy.audio.begin();
   doBrandLogos();
   arduboy.waitNoButtons();

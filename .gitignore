@@ -1,3 +1,5 @@
 *~
 .floo*
 *.srctrl*
+doc
+.ccls-cache

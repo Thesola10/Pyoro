@@ -1,4 +1,4 @@
-/**
+/*
  * Pyoro clone for the Arduboy.
  * This program is licensed under the terms of the Creative Commons Zero (CC0) license.
  *

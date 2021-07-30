@@ -1,4 +1,4 @@
-/**
+/*
  * Pyoro clone for the Arduboy.
  * This program is licensed under the terms of the Creative Commons Zero (CC0) license.
  *
@@ -65,8 +65,9 @@ void Game::gameOver(void)
 
 char Game::checkBrick(int index)
 {
-    if      (this->bricks >> index & 1) return 1;
-    else if (this->brickAnim >> index & 1) return 2;
+    if      (this->bricks >> index & 1)     return 1;
+    else if (this->brickAnim >> index & 1)  return 2;
+    else                                    return 0;
 }
 
 void Game::flipBrick(int index, bool anim)

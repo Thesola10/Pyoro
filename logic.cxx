@@ -91,8 +91,10 @@ void Game::updateAngels(void)
     for (int i = 0; i < 8; i++) {
         if (angels[i] && angels[i]->step) {
             angels[i]->display();
+
             if (!(this->metronome % 10))
                 angels[i]->step ++;
+            
             if (angels[i]->step == 5)
                 this->flipBrick(angels[i]->replaces, true);
             else if (angels[i]->step == 7)

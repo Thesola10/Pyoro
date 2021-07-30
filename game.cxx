@@ -58,10 +58,10 @@ void Angel::Creator::schedule(Game *game)
         }
     }
     for (int i = 0; i < 8; i++) {
-        if (!schedule[i]) {
-            schedule[i] = index;
+        if (!sched[i]) {
+            sched[i] = index;
             break;
-        } else if (schedule[i] == index) {     // Prevent duplicates
+        } else if (sched[i] == index) {     // Prevent duplicates
             break;
         }
     }
@@ -69,58 +69,60 @@ void Angel::Creator::schedule(Game *game)
 
 void Angel::Creator::update(Game *game)
 {
-if (this->schedule[0])      // None of this needs to occur if the schedule is empty
-    if (this->timer == 0) {
-        // We find an empty slot to add an angel
-        for (int i = 0; i < 8; i++)
-            if (!game->angels[i]) {
-                game->angels[i] = this->create(this->schedule[0]);
-                break;
-            }
-        // We shift all schedule elements to the left
-        for (int i = 1; i < 8; i++) 
-            this->sched[i - 1] = this->sched[i];
-        this->sched[7] = 0;
-        // We reset the timer
-        timer = 36
-    } else if (game->metronome % 10 == 0) {
-        timer--;
+    if (this->sched[0]) {   // None of this needs to occur if the schedule is empty
+        if (this->timer == 0) {
+            // We find an empty slot to add an angel
+            for (int i = 0; i < 8; i++)
+                if (!game->angels[i]) {
+                    game->angels[i] = this->create(this->sched[0]);
+                    break;
+                }
+            // We shift all schedule elements to the left
+            for (int i = 1; i < 8; i++) 
+                this->sched[i - 1] = this->sched[i];
+            this->sched[7] = 0;
+            // We reset the timer
+            timer = 36;
+        } else if (game->metronome % 10 == 0) {
+            timer--;
+        }
     }
 }
 
 
-Bean Bean::Creator::create(bool allowsuper)
+Bean *Bean::Creator::create(bool allowsuper)
 {
-    Bean b;
+    Bean *b = new Bean();
     char t = random(1, 100);
 
-    if (t < 15)                     b.type = B_HEAL;
-    else if (allowsuper && t < 20)  b.type = B_SUPER_A;
-    else                            b.type = B_NORMAL;
-    b.x = random(0, 120);
-    b.y = 0;
-    b.speed = random(this->avgSpeed - 3, this->avgSpeed + 3);
+    if (t < 15)                     b->type = B_HEAL;
+    else if (allowsuper && t < 20)  b->type = B_SUPER_A;
+    else                            b->type = B_NORMAL;
+    b->x = random(0, 120);
+    b->y = 0;
+    b->speed = random(this->avgSpeed - 3, this->avgSpeed + 3);
+    return b;
 }
 
-Angel Angel::Creator::create(char replaces)
+Angel *Angel::Creator::create(char replaces)
 {
-    Angel a;
+    Angel *a = new Angel();
 
-    a.replaces = replaces;
+    a->replaces = replaces;
     return a;
 }
 
 
-Bird::tongue_pos getTonguePos(void)
+Bird::tongue_pos Bird::getTonguePos(void)
 {
     Bird::tongue_pos pos;
 
     pos.basex = this->direction? this->posx/100 : (this->posx/100) + 8;
     pos.basey = 53;
 
-    pos.tipx = this->direction? basex - (this->tongueLen/100)
-                             : basex + (this->tongueLen/100);
-    pos.tipy = 53 - (this->>tongueLen/100);
+    pos.tipx = this->direction ? pos.basex - (this->tongueLen/100)
+                               : pos.basex + (this->tongueLen/100);
+    pos.tipy = 53 - (this->tongueLen/100);
 
     return pos;
 }
@@ -128,7 +130,7 @@ Bird::tongue_pos getTonguePos(void)
 void Bird::draw(void)
 {
     ardbitmap.drawBitmap(this->posx / 100, 52,           // X and Y coords
-                         this->tongueExt? bird+8 : bird, // bird+8 is a second sprite
+                         this->tongueLen? bird+8 : bird, // bird+8 is a second sprite
                          8, 8,                           // Size of the sprite
                          WHITE, ALIGN_NONE,              // Color params
                          this->direction? MIRROR_NONE : MIRROR_HORIZONTAL
@@ -150,6 +152,11 @@ void Bean::display(void)
         arduboy.drawBitmap(x, y/100, bean+4, 4, 5, WHITE);
 }
 
+void Bean::update(Game *game, int tongueTipX, int tongueTipY)
+{
+
+}
+
 void Angel::display(void)
 {
     // We draw the angel
@@ -162,4 +169,9 @@ void Angel::display(void)
                            brick,
                            4, 4, WHITE
                           );
+}
+
+void Angel::update(Game *game)
+{
+
 }

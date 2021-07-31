@@ -12,7 +12,7 @@
 #define __GAME_H
 
 /**
- * \file        game.hxx
+ * \file        game.h
  * \brief       In-game logic for bird, bean and angel
  *
  * This file contains definitions for objects that represent components of the
@@ -217,7 +217,7 @@ public:
      *
      * \brief       List of positions for descent animation
      */
-    static const unsigned char animation[8] = { 0, 2, 24, 40, 48, 52, 40, 10 };
+    static constexpr unsigned char animation[8] = { 0, 2, 24, 40, 48, 52, 40, 10 };
    
     /**
      * This class represents the parameters with which to create new angels,

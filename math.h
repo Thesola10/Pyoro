@@ -11,7 +11,7 @@
 #ifndef __MATH_H
 #define __MATH_H
 /**
- * \file        math.hxx
+ * \file        math.h
  * \brief       Math functions useful to the game logic
  *
  * This file contains bounded implementations for common arithmetic operators.

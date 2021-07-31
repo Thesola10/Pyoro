@@ -8,7 +8,7 @@
  * Kindly update this comment block when editing this source file, thanks!
  */
 
-#include "graphics.hxx"
+#include "graphics.h"
 
 void DialogBox::draw(void)
 {

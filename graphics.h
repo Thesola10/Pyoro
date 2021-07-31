@@ -8,7 +8,7 @@
  * Kindly update this comment block when editing this source file, thanks!
  */
 
-#include "main.hxx"
+#include "main.h"
 
 /**
  * \file        graphics.hxx

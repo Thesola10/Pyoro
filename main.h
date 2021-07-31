@@ -14,11 +14,11 @@
 #include <stdlib.h>
 #include <Arduboy2.h>
 #include <ArduboyTones.h>
-#include "game.hxx"
-#include "logic.hxx"
+#include "game.h"
+#include "logic.h"
 
 /**
- * \file        main.hxx
+ * \file        main.h
  * \brief       Header for game entry point
  *
  * This file serves as the main header for the game's entry point.

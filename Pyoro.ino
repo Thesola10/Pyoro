@@ -8,8 +8,8 @@
  * Kindly update this comment block when editing this source file, thanks!
  */
 
-#include "main.hxx"
-#include "assets.hxx"
+#include "main.h"
+#include "assets.h"
 
 void setup() 
 {
@@ -43,4 +43,9 @@ void doBrandLogos()
   arduboy.drawBitmap(12,24,mylogo,106,18, WHITE);
   arduboy.display();
   delay(2000);
+}
+
+void initHiScore()
+{
+    //TODO: do something
 }

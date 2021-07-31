@@ -10,10 +10,10 @@
 
 #ifndef __LOGIC_H
 #define __LOGIC_H
-#include "game.hxx"
+#include "game.h"
 
 /**
- * \file        logic.hxx
+ * \file        logic.h
  * \brief       Functions and objects that represent overarching game logic
  *
  * This file contains the functions and objects that define the normal running

@@ -14,7 +14,7 @@
 #include <avr/pgmspace.h>
 
 /**
- * \file        assets.hxx
+ * \file        assets.h
  * \brief       Bitmap assets used in the game
  *
  * This file contains static definitions for the graphical objects in game. 

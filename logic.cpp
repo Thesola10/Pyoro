@@ -8,9 +8,9 @@
  * Kindly update this comment block when editing this source file, thanks!
  */
 
-#include "logic.hxx"
-#include "graphics.hxx"
-#include "assets.hxx"
+#include "logic.h"
+#include "graphics.h"
+#include "assets.h"
 
 /* static */
 void MainMenu::init(void)

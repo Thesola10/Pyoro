@@ -8,11 +8,11 @@
  * Kindly update this comment block when editing this source file, thanks!
  */
 
-#include "main.hxx"
-#include "logic.hxx"
-#include "game.hxx"
-#include "assets.hxx"
-#include "math.hxx"
+#include "main.h"
+#include "logic.h"
+#include "game.h"
+#include "assets.h"
+#include "math.h"
 
 void Bird::update(Game *game)
 {
@@ -24,7 +24,7 @@ void Bird::update(Game *game)
                                            && ((tongueLenPx + pos.basex) < 128 || this->direction)
                                            && (tongueLenPx < pos.basex || !this->direction)
                                            && !(game->aHeld && this->tongueRet))                
-        { add_bound(&this->tongueLen, this->speed*2, 128'00); 
+        { add_bound(&this->tongueLen, this->speed*2, 12800); 
           game->aPressed = true; }
                                          
     else if (arduboy.pressed(LEFT_BUTTON)  && this->posx > 0   
@@ -36,7 +36,7 @@ void Bird::update(Game *game)
     else if (arduboy.pressed(RIGHT_BUTTON) && this->posx < 120'00 
                                            && !this->tongueRet && !this->tongueLen
                                            && game->checkBrick((posPx + 8)/4))        
-        { add_bound(&this->posx, this->speed, 120'00); 
+        { add_bound(&this->posx, this->speed, 12000); 
           this->direction = false; }
 }
 
@@ -160,9 +160,9 @@ void Bean::update(Game *game, int tongueTipX, int tongueTipY)
     if (game->aPressed  && rough_eq(this->y / 100, tongueTipY, 3)
                         && rough_eq(this->x,       tongueTipX, 2)) {
         // Award score according to height
-        if      (this->y > 40'00) game->score.update(50);
-        else if (this->y > 24'00) game->score.update(100);
-        else if (this->y > 10'00) game->score.update(500);
+        if      (this->y > 4000) game->score.update(50);
+        else if (this->y > 2400) game->score.update(100);
+        else if (this->y > 1000) game->score.update(500);
         else                      game->score.update(1000);
 
         // Special effect (if applicable)
@@ -183,14 +183,14 @@ void Bean::update(Game *game, int tongueTipX, int tongueTipY)
         }
 
         delete this;
-    } else if (this->y >= 60'00) {      // The bean hit the ground
+    } else if (this->y >= 6000) {      // The bean hit the ground
         if (game->checkBrick((this->x / 4) + 1) == 1) {
             game->flipBrick((this->x / 4) + 1, false);  // Remove brick
             game->flipBrick((this->x / 4) + 1, true);   // Enable animation
         }
         
         delete this;
-    } else if (this->y >= 50'00         // The bean hit the player
+    } else if (this->y >= 5000         // The bean hit the player
             && rough_eq(this->x, game->player->posx/100 + 2, 8)) {
         game->gameOver();
     } else {                            // Business as usual

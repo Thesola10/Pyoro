@@ -9,7 +9,7 @@
  */
 
 #include <limits.h>
-#include "math.h"
+#include "mathf.h"
 
 void sub_bound(unsigned int *value, const unsigned int delta, const unsigned int min)
 {

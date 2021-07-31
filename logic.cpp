@@ -58,7 +58,7 @@ void Game::gameOver(void)
 {
     doLoop = &DialogBox::loop;
     DialogBox("GAME OVER", this->score.text,
-              this->score.value > hiscore ? "NEW RECORD!" : "").draw();
+              this->score.value > hiscore ? "NEW RECORD!" : "", true).draw();
     if (this->score.value > hiscore) {
         EEPROM.put(ROM_HISCORE, this->score.value);
         hiscore = this->score.value;

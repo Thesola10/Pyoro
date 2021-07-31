@@ -8,11 +8,11 @@
  * Kindly update this comment block when editing this source file, thanks!
  */
 
+#include "mathf.h"
 #include "main.h"
 #include "logic.h"
 #include "game.h"
 #include "assets.h"
-#include "math.h"
 
 void Bird::update(Game *game)
 {
@@ -33,7 +33,7 @@ void Bird::update(Game *game)
         { sub_bound(&this->posx, this->speed);     
           this->direction = true; }
                                          
-    else if (arduboy.pressed(RIGHT_BUTTON) && this->posx < 120'00 
+    else if (arduboy.pressed(RIGHT_BUTTON) && this->posx < 12000 
                                            && !this->tongueRet && !this->tongueLen
                                            && game->checkBrick((posPx + 8)/4))        
         { add_bound(&this->posx, this->speed, 12000); 

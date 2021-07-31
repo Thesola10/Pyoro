@@ -8,10 +8,10 @@
  * Kindly update this comment block when editing this source file, thanks!
  */
 
-#ifndef __MATH_H
-#define __MATH_H
+#ifndef __MATHF_H
+#define __MATHF_H
 /**
- * \file        math.h
+ * \file        mathf.h
  * \brief       Math functions useful to the game logic
  *
  * This file contains bounded implementations for common arithmetic operators.
@@ -62,6 +62,6 @@ void add_bound(unsigned int *value, const unsigned int delta, const unsigned int
  */
 bool rough_eq(const unsigned int a, const unsigned int b, const unsigned char precision);
 
-#endif //__MATH_H
+#endif //__MATHF_H
 
 // vim: ft=cpp.doxygen

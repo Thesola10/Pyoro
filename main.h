@@ -26,13 +26,13 @@
 
 #ifndef DOXYGEN
 
-Arduboy2 arduboy;
-ArduboyTones sound(arduboy.audio.enabled);
+extern Arduboy2 arduboy;
+extern ArduboyTones sound;
 
 #define ARDBITMAP_SBUF arduboy.sBuffer
 #include <ArdBitmap.h>
 
-ArdBitmap<WIDTH, HEIGHT> ardbitmap;
+extern ArdBitmap<WIDTH, HEIGHT> ardbitmap;
 
 #endif //DOXYGEN
 
@@ -79,7 +79,7 @@ ArdBitmap<WIDTH, HEIGHT> ardbitmap;
  * \brief           In-memory copy of high score
  * \see     ROM_HISCORE     Area in EEPROM where high score is loaded/saved
  */
-unsigned int hiscore;
+static unsigned int hiscore;
 
 /**
  * This variable stores the current instance of @ref Game, for use in the
@@ -89,7 +89,7 @@ unsigned int hiscore;
  * \brief           State instance for an ongoing game
  * \see     doLoop          Run-time state function which uses this variable
  */
-static Game *game;
+extern Game *game;
 
 /**
  * This variable indicates the running state of the game. In order to switch to
@@ -98,8 +98,7 @@ static Game *game;
  *
  * \brief           Running state of the game
  */
-void (*doLoop)() = &MainMenu::loop;
-
+extern void (*doLoop)(void); 
 #endif //__MAIN_H
 
 // vim: ft=cpp.doxygen

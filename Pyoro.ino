@@ -11,6 +11,9 @@
 #include "main.h"
 #include "assets.h"
 
+ArduboyTones sound(arduboy.audio.enabled);
+void (*doLoop)(void) = MainMenu::loop;
+
 void setup() 
 {
   arduboy.boot();

@@ -24,7 +24,7 @@ void Bird::update(Game *game)
                                            && ((tongueLenPx + pos.basex) < 128 || this->direction)
                                            && (tongueLenPx < pos.basex || !this->direction)
                                            && !(game->aHeld && this->tongueRet))                
-        { add_bound(&this->posx, this->speed*2, 12800); 
+        { add_bound(&this->tongueLen, this->speed*2, 128'00); 
           game->aPressed = true; }
                                          
     else if (arduboy.pressed(LEFT_BUTTON)  && this->posx > 0   
@@ -33,10 +33,10 @@ void Bird::update(Game *game)
         { sub_bound(&this->posx, this->speed);     
           this->direction = true; }
                                          
-    else if (arduboy.pressed(RIGHT_BUTTON) && this->posx < 12000 
+    else if (arduboy.pressed(RIGHT_BUTTON) && this->posx < 120'00 
                                            && !this->tongueRet && !this->tongueLen
                                            && game->checkBrick((posPx + 8)/4))        
-        { add_bound(&this->posx, this->speed, 12000); 
+        { add_bound(&this->posx, this->speed, 120'00); 
           this->direction = false; }
 }
 
@@ -48,7 +48,9 @@ void Bean::Creator::update(Game *game)
 void Angel::Creator::schedule(Game *game)
 {
     char index = 0;
-    if (! ~(game->bricks)) return;
+    if (! ~(game->bricks)) return;  // Check if there is a broken brick.
+                                    // We bitwise-NOT the mask, and if the
+                                    // result is 0 then all bricks are intact
 
     while (true) {
         char i = random(0, 31);
@@ -154,7 +156,50 @@ void Bean::display(void)
 
 void Bean::update(Game *game, int tongueTipX, int tongueTipY)
 {
+    // The player grabbed the bean
+    if (game->aPressed  && rough_eq(this->y / 100, tongueTipY, 3)
+                        && rough_eq(this->x,       tongueTipX, 2)) {
+        // Award score according to height
+        if      (this->y > 40'00) game->score.update(50);
+        else if (this->y > 24'00) game->score.update(100);
+        else if (this->y > 10'00) game->score.update(500);
+        else                      game->score.update(1000);
 
+        // Special effect (if applicable)
+        switch (this->type) {
+        case B_HEAL:
+            game->angelCreator->schedule(game);
+            break;
+        case B_SUPER_A:
+        case B_SUPER_B:
+            for (int w = 0; w < 8; w++) // Repair 8 bricks
+                game->angelCreator->schedule(game);
+            for (Bean *bean : game->beans) {
+                delete bean;
+                game->score.update(50); // Award 50 pts per bean on screen
+            }
+            break;
+        default: break;
+        }
+
+        delete this;
+    } else if (this->y >= 60'00) {      // The bean hit the ground
+        if (game->checkBrick((this->x / 4) + 1) == 1) {
+            game->flipBrick((this->x / 4) + 1, false);  // Remove brick
+            game->flipBrick((this->x / 4) + 1, true);   // Enable animation
+        }
+        
+        delete this;
+    } else if (this->y >= 50'00         // The bean hit the player
+            && rough_eq(this->x, game->player->posx/100 + 2, 8)) {
+        game->gameOver();
+    } else {                            // Business as usual
+        this->y += this->speed;
+
+        // Animation flip-flop
+        if      (this->type == B_SUPER_A)   this->type = B_SUPER_B;
+        else if (this->type == B_SUPER_B)   this->type = B_SUPER_A;
+    }
 }
 
 void Angel::display(void)
@@ -173,5 +218,13 @@ void Angel::display(void)
 
 void Angel::update(Game *game)
 {
+    if (this->step == 7) {
+        delete this;            // Ran out of steps, unload
+        return;
+    } else if (game->metronome % 10) {
+        this->step ++;          // Perform angel animation
+    }
 
+    if (this->step == 5)        // Replace brick
+        game->flipBrick(this->replaces, false);
 }

@@ -79,8 +79,14 @@ public:
      * \see Bird::getTonguePos()    Retrieve the position of the tongue
      */
     void drawTongue(void);
+
+    /**
+     * In units of 0.01 pixel, the horizontal position of the player.
+     *
+     * \brief       Player X coord in 0.01 pixel units
+     */
+    unsigned int posx;
 private:
-    unsigned int posx;      // In 0.01 pixel units, Pyoro's x-coordinate
     int          speed;     // In 0.01 pixel units per second, Pyoro's x speed
     unsigned int tongueLen; // In 0.01 pixel units, Pyoro's tongue length
     bool         tongueRet; // True if Pyoro's tongue is retracting

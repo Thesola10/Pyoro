@@ -12,12 +12,14 @@
 #include "graphics.hxx"
 #include "assets.hxx"
 
-static void MainMenu::init(void)
+/* static */
+void MainMenu::init(void)
 {
 
 }
 
-static void MainMenu::loop(void)
+/* static */
+void MainMenu::loop(void)
 {
 
 }
@@ -40,12 +42,14 @@ void MainMenu::drawBackdrop(void)
 }
 
 
-static void Game::init(void)
+/* static */
+void Game::init(void)
 {
 
 }
 
-static void Game::loop(void)
+/* static */
+void Game::loop(void)
 {
     
 }
@@ -78,30 +82,23 @@ void Game::flipBrick(int index, bool anim)
 
 void Game::updateBeans(void)
 {
-    Bird::tongue_pos tpos = player->getTonguePos();
-    for (int i = 0; i < 16; i++) {
-        if (beans[i] && beans[i]->type != Bean::type::B_NONE)
-            beans[i]->update(this, tpos.tipx, tpos.tipy);
+    Bird::tongue_pos tpos = this->player->getTonguePos();
+    for (Bean *bean : this->beans) {
+        if (bean && bean->type != Bean::type::B_NONE)
+            bean->update(this, tpos.tipx, tpos.tipy);
     }
-    beanCreator->update(this);
+    this->beanCreator->update(this);
 }
 
 void Game::updateAngels(void)
 {
-    for (int i = 0; i < 8; i++) {
-        if (angels[i] && angels[i]->step) {
-            angels[i]->display();
-
-            if (!(this->metronome % 10))
-                angels[i]->step ++;
-            
-            if (angels[i]->step == 5)
-                this->flipBrick(angels[i]->replaces, true);
-            else if (angels[i]->step == 7)
-                delete angels[i];
+    for (Angel *angel : this->angels) {
+        if (angel && angel->step) {
+            angel->display();
+            angel->update(this);
         }
     }
-    angelCreator->update(this);
+    this->angelCreator->update(this);
 }
 
 void Game::Score::update(int add)

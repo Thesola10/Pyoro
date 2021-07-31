@@ -28,7 +28,8 @@ void DialogBox::draw(void)
     arduboy.print(this->prompt);
 }
 
-static void DialogBox::loop(void)
+/* static */
+void DialogBox::loop(void)
 {
 
 }

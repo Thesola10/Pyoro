@@ -1,1 +1,10 @@
 *~
+.floo*
+*.srctrl*
+doc
+.ccls-cache
+build
+.pio
+
+# ccls can now be generated using `platformio --ide vim init`
+.ccls
